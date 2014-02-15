@@ -11,4 +11,5 @@ points.
 
 1. $ git clone https://github.com/borgebjo/adapt.git
 2. $ cd adapt
-3. $ adapt --help
+3. $ scons
+4. $ ./adapt --help
