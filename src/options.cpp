@@ -25,7 +25,8 @@ void Options::parse(int argc, char *argv[])
    po::options_description desc(description.str());
    desc.add_options()
       ("help,h", "print this")
-      ("circle", "fit a circle to the given points");
+      ("circle", "fit a circle to the given points")
+      ("line", "fit a line to the given points");
 
    po::variables_map vm;
    po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -36,12 +37,19 @@ void Options::parse(int argc, char *argv[])
       cout << desc << endl;
       return;
    }
-
-   if (vm.count("circle")) {
-      cout << "Fit a circle" << endl;
-      double a;
-   } else {
-      cout << "Nothing to do." << endl;
+   else if (vm.count("circle"))
+   {
+      cout << "Fit a circle is not implemented." << endl;
+   }
+   else if (vm.count("line"))
+   {
+      cout << "Fit a line is not implemented." << endl;
+   }
+   else
+   {
+      cout << "No known options given." << endl
+	   << endl
+	   << desc << endl;
    }
 }
 
