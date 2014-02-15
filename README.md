@@ -6,6 +6,7 @@ points.
 * linux
 * gcc 4.8
 * SCons
+* boost 1.53
 
 # Getting started #
 
