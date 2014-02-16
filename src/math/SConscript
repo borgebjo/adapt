@@ -1,0 +1,10 @@
+import os
+
+Import('env')
+
+cppfiles = Glob('*.cpp')
+objs = env.Object(cppfiles)
+
+testfiles = Glob('test/*.cpp')
+testobjs = env.Object(testfiles)
+Return('objs', 'testobjs')
