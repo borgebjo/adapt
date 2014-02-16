@@ -2,13 +2,17 @@ import os
 
 env = Environment()
 env.Append(CCFLAGS = '-std=c++11')
-env['LIBPATH'] = ['/usr/share/lintian/overrides']
-env['LIBS'] = ['boost_program_options']
+env['LIBS'] = ['boost_unit_test_framework', 'boost_program_options']
 env['CPPPATH'] = ['#/src']
 Export('env')
 
-objs = SConscript('src/SConscript')
+[adapt, testapp] = SConscript('src/SConscript')
 
-env.Program('adapt', objs)
+test_alias = Alias('test', [testapp], testapp[0].abspath)
+AlwaysBuild(test_alias)
+
+Depends(adapt, test_alias)
+
+env.Install("#/bin", adapt)
 
 

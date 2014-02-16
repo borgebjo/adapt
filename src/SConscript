@@ -2,6 +2,20 @@ import os
 
 Import('env')
 
-objs = env.Object(Glob('*.cpp'))
+def filtered_glob(env, pattern, omit=[],
+  ondisk=True, source=False, strings=False):
+    return filter(
+      lambda f: os.path.basename(f.path) not in omit,
+      env.Glob(pattern))
 
-Return('objs')
+objs = []
+testobjs = []
+
+cppfiles = filtered_glob(env, "*.cpp", omit = "main.cpp")
+objs.append(env.Object(cppfiles))
+adapt = env.Program('adapt', objs + Object("main.cpp"))
+
+testobjs.append(env.Object("test/testmain.cpp"))
+testapp = env.Program('unit_test_runner', objs + testobjs)
+
+Return('adapt', 'testapp')

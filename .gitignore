@@ -1,3 +1,4 @@
 .sconsign.dblite
 *.o
 adapt
+unit_test_runner
