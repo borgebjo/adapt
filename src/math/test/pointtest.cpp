@@ -51,6 +51,33 @@ BOOST_AUTO_TEST_CASE(test_output_streaming_operator)
    BOOST_CHECK_EQUAL("1.2 3.4",ss.str());
 }
 
+BOOST_AUTO_TEST_CASE(test_input_streaming_operator)
+{
+   Point p{};
+   std::stringstream ss;
+   ss << "1.2 3.4";
+   ss >> p;
+
+   Point expected{1.2, 3.4};
+   BOOST_CHECK_EQUAL(expected,p);
+}
+
+BOOST_AUTO_TEST_CASE(test_input_streaming_operator_fails)
+{
+   Point p{};
+   std::stringstream ss;
+   ss << "1.2 df";
+   ss >> p;
+
+   // p is not changed
+   Point expected{};
+   BOOST_CHECK_EQUAL(expected,p);
+
+   // failbit is set
+   BOOST_CHECK(ss.fail());
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
 
 } // namespace test

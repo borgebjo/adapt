@@ -23,6 +23,7 @@ private:
 bool operator!=(const Point& lhs, const Point& rhs);
 bool operator==(const Point& lhs, const Point& rhs);
 std::ostream& operator<<(std::ostream& ost, const Point& p);
+std::istream& operator>>(std::istream& is, Point& p);
 
 }
 } // namespace adapt

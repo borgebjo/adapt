@@ -1,6 +1,7 @@
 #include "math/point.h"
 
 #include <ostream>
+#include <istream>
 
 namespace adapt {
 namespace math {
@@ -41,6 +42,19 @@ std::ostream& operator<<(std::ostream& ost, const Point& p)
 {
    ost << p.x() << " " << p.y();
    return ost;
+}
+
+std::istream& operator>>(std::istream& is, Point& p)
+{
+   double x,y;
+   is >> x;
+   if (is.fail())
+      return is;
+   is >> y;
+   if (is.fail())
+      return is;
+   p = Point{x,y};
+   return is;
 }
 
 }
