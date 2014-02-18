@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include "math/point.h"
-
+#include <sstream>
 
 namespace adapt {
 namespace math {
@@ -41,6 +41,14 @@ BOOST_AUTO_TEST_CASE(test_operator_not_equal)
 
    lhs = Point{1,0};
    BOOST_CHECK(lhs != rhs);
+}
+
+BOOST_AUTO_TEST_CASE(test_output_streaming_operator)
+{
+   Point p{1.2, 3.4};
+   std::stringstream ss;
+   ss << p;
+   BOOST_CHECK_EQUAL("1.2 3.4",ss.str());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

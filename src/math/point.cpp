@@ -1,5 +1,7 @@
 #include "math/point.h"
 
+#include <ostream>
+
 namespace adapt {
 namespace math {
 
@@ -33,6 +35,12 @@ bool operator!=(const Point& lhs, const Point& rhs)
 bool operator==(const Point& lhs, const Point& rhs)
 {
    return (lhs.x() == rhs.x()) && (lhs.y() == rhs.y());
+}
+
+std::ostream& operator<<(std::ostream& ost, const Point& p)
+{
+   ost << p.x() << " " << p.y();
+   return ost;
 }
 
 }
