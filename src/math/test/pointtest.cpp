@@ -26,6 +26,23 @@ BOOST_AUTO_TEST_CASE(test_default_constructor_sets_zero)
    BOOST_CHECK_CLOSE(0.0, point.y(), 0.01);
 }
 
+BOOST_AUTO_TEST_CASE(test_operator_equal)
+{
+   Point lhs{123.2, 2.1332};
+   Point rhs{123.2, 2.1332};
+   BOOST_CHECK(lhs == rhs);
+}
+
+BOOST_AUTO_TEST_CASE(test_operator_not_equal)
+{
+   Point lhs{0,1};
+   Point rhs{2,2};
+   BOOST_CHECK(lhs != rhs);
+
+   lhs = Point{1,0};
+   BOOST_CHECK(lhs != rhs);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 } // namespace test

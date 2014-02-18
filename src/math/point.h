@@ -15,6 +15,9 @@ private:
    double y_;
 };
 
+bool operator!=(const Point& lhs, const Point& rhs);
+bool operator==(const Point& lhs, const Point& rhs);
+
 }
 } // namespace adapt
 
