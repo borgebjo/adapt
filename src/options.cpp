@@ -1,4 +1,6 @@
 #include "options.h"
+#include "fitter.h"
+
 
 #include <iostream>
 #include <sstream>
@@ -9,7 +11,7 @@ using namespace std;
 
 namespace adapt {
 
-void Options::parse(int argc, char *argv[])
+std::unique_ptr<Fitter> Options::parse(int argc, char *argv[])
 {
    stringstream description;
    description << "adapt is about fitting shapes to a set of points." << endl
@@ -35,7 +37,6 @@ void Options::parse(int argc, char *argv[])
    if (vm.count("help"))
    {
       cout << desc << endl;
-      return;
    }
    else if (vm.count("circle"))
    {
@@ -51,6 +52,7 @@ void Options::parse(int argc, char *argv[])
 	   << endl
 	   << desc << endl;
    }
+   return std::unique_ptr<Fitter>(nullptr);
 }
 
 } // namespace adapt
