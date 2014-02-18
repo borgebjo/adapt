@@ -14,7 +14,7 @@ cppfiles = filtered_glob(env, "*.cpp", omit = "main.cpp")
 objs.append(env.Object(cppfiles))
 adapt = env.Program('adapt', objs + env.Object("main.cpp"))
 
-testobjs.append(env.Object("test/testmain.cpp"))
+testobjs.append(env.Object(Glob('test/*.cpp')))
 testapp = env.Program('unit_test_runner', objs + testobjs)
 
 Return('adapt', 'testapp')
