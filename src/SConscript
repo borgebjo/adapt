@@ -8,6 +8,9 @@ def filtered_glob(env, pattern, omit=[],
       lambda f: os.path.basename(f.path) not in omit,
       env.Glob(pattern))
 
+objects = [[], []] #contains [[objects], [testobjects]]
+objects.append(SConscript('math/SConscript'))
+objects.append(SConscript('line/SConscript'))
 [objs, testobjs] = SConscript('math/SConscript')
 
 cppfiles = filtered_glob(env, "*.cpp", omit = "main.cpp")
