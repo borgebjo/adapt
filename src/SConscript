@@ -11,13 +11,11 @@ def filtered_glob(env, pattern, omit=[],
 objects = [[], []] #contains [[objects], [testobjects]]
 objects.append(SConscript('math/SConscript'))
 objects.append(SConscript('line/SConscript'))
-[objs, testobjs] = SConscript('math/SConscript')
 
 cppfiles = filtered_glob(env, "*.cpp", omit = "main.cpp")
-objs.append(env.Object(cppfiles))
-adapt = env.Program('adapt', objs + env.Object("main.cpp"))
+objects.append([[env.Object(cppfiles)], [env.Object(Glob('test/*.cpp'))]])
+adapt = env.Program('adapt', objects[0] + env.Object("main.cpp"))
 
-testobjs.append(env.Object(Glob('test/*.cpp')))
-testapp = env.Program('unit_test_runner', objs + testobjs)
+testapp = env.Program('unit_test_runner', objects)
 
 Return('adapt', 'testapp')
