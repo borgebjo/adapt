@@ -2,3 +2,4 @@
 *.o
 adapt
 unit_test_runner
+bin
