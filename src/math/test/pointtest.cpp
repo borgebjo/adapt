@@ -48,7 +48,9 @@ BOOST_AUTO_TEST_CASE(test_output_streaming_operator)
    Point p{1.2, 3.4};
    std::stringstream ss;
    ss << p;
-   BOOST_CHECK_EQUAL("1.2 3.4",ss.str());
+   BOOST_CHECK_EQUAL("1.2 3.4 ",ss.str());
+   ss << p;
+   BOOST_CHECK_EQUAL("1.2 3.4 1.2 3.4 ",ss.str());
 }
 
 BOOST_AUTO_TEST_CASE(test_input_streaming_operator)

@@ -40,7 +40,7 @@ bool operator==(const Point& lhs, const Point& rhs)
 
 std::ostream& operator<<(std::ostream& ost, const Point& p)
 {
-   ost << p.x() << " " << p.y();
+   ost << p.x() << " " << p.y() << " ";
    return ost;
 }
 
