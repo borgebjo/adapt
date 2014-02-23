@@ -14,19 +14,23 @@ Parser2d::~Parser2d()
 {
 }
 
+// Reads points from the input stream.
 std::vector<math::Point> Parser2d::parse()
 {
    std::vector<math::Point> points{};
-   while (!theStream.eof() && theStream.good())
+   while (theStream)
    {
       math::Point p;
       theStream >> p;
-      if (theStream.fail())
+      if (!theStream.eof() && theStream.fail())
       {
 	 int currentParseNumber = points.size() + 1;
 	 throw ParserError(currentParseNumber);
       }
-      points.push_back(p);
+      else if (!theStream.fail())
+      {
+	 points.push_back(p);
+      }
    }
 
    return points;

@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(test_input)
 {
    std::stringstream ss;
    ss << "1.0 2.0" << endl;
-   ss << "3.0 4.0";
+   ss << "3.0 4.0" << endl;
    Parser2d parser(ss);
 
    std::vector<math::Point> expected{{1.0, 2.0}, {3.0, 4.0}};
@@ -29,11 +29,36 @@ BOOST_AUTO_TEST_CASE(test_bad_input)
 {
    std::stringstream ss;
    ss << "1.0 2.0" << endl;
-   ss << "bad input";
+   ss << "bad input" << endl;
    Parser2d parser(ss);
 
    BOOST_REQUIRE_THROW(parser.parse(), ParserError);
 }
+
+BOOST_AUTO_TEST_CASE(test_input_ends_with_end_of_file)
+{
+   std::stringstream ss;
+   ss << "1.0 2.0" << endl;
+   ss << "2.0 1.0";
+   Parser2d parser(ss);
+   std::vector<math::Point> expected{{1.0, 2.0}, {2.0, 1.0}};
+   auto result = parser.parse();
+   BOOST_CHECK_EQUAL_COLLECTIONS(begin(expected), end(expected),
+   				 begin(result), end(result));
+}
+
+BOOST_AUTO_TEST_CASE(test_uneven_input)
+{
+   std::stringstream ss;
+   ss << "1.0 2.0" << endl;
+   ss << "2.0" << endl;;
+   Parser2d parser(ss);
+   std::vector<math::Point> expected{{1.0, 2.0}};
+   auto result = parser.parse();
+   BOOST_CHECK_EQUAL_COLLECTIONS(begin(expected), end(expected),
+   				 begin(result), end(result));
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
 
