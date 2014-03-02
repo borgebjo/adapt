@@ -1,6 +1,6 @@
 #include "options.h"
 #include "fitter.h"
-
+#include "line/linefitter.h"
 
 #include <iostream>
 #include <sstream>
@@ -44,7 +44,7 @@ std::unique_ptr<Fitter> Options::parse(int argc, char *argv[])
    }
    else if (vm.count("line"))
    {
-      cout << "Fit a line is not implemented." << endl;
+      return std::unique_ptr<Fitter>(new line::LineFitter{});
    }
    else
    {
