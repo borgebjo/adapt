@@ -4,17 +4,24 @@
 #include "fitter.h"
 
 #include <vector>
+#include <iosfwd>
 
 namespace adapt {
+namespace math { class Point; }
 namespace line {
 
 class LineFitter : public adapt::Fitter
 {
 public:
-   LineFitter() = default;
+   LineFitter();
    virtual ~LineFitter();
 
    virtual void adapt(const std::vector<math::Point>&);
+   virtual void publish(std::ostream& ost) const;
+
+private:
+   double theA;
+   double theB;
 };
 
 
